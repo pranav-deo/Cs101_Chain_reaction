@@ -10,17 +10,17 @@ bool ifAllowed(int x,int y,int value)
 {
   if((x==1 && y==1) || (x==9 && y==6) || (x==1 && y==6) || (x==9 && y==1)) 
   {
-    if(value<=1) return true;
+    if(value<1) return true;
     else return false;
   }
-  elseif(x==1 || x==9 || y==1 || y==6)
+  else if(x==1 || x==9 || y==1 || y==6)
   {
-    if(value<=2) return true;
+    if(value<2) return true;
     else return false;
   }
   else()
   {
-    if(value<=3) return true;
+    if(value<3) return true;
     else return false;
   }
 }
@@ -33,8 +33,30 @@ void displayMatrix(int a[][8],int marker[][8])
     for(int j=0;j<8;j++)
     { 
       if(marker[i][j]==2) cout<<'-';
-      cout<<a[i][j];
+      cout<<a[i][j]<<" ";
     }
     cout<<endl;
   }
+  return;
 }
+
+//Function for overflow of blobs
+void overflow()  //-----------------------------------------------------------------------------Function to be completed
+
+//Function to add the blobs
+void addBlobs(int x,int y,int a[][10],int marker[][8],int player)
+{
+  if(marker[x][y]==0)
+  {
+    marker[x][y]=player;
+    a[x][y]++;
+  }
+  else if(marker[x][y]!=0)
+  {
+    if(marker[x][y]==player)
+    { 
+      if(isAllowed(x,y,a[x][y])==true) a[x][y]++;
+      if(isAllowed(x,y,a[x][y])==false) overflow() //------------------------------------------Arguements to be written
+    }
+    if(marker[x][y]!=player)cout<<"Illegal move"<<endl;
+  }
