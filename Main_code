@@ -2,9 +2,38 @@
 
 #include <iostream.h>
 #include <conio.h>
-#include <string.h>
-#include <vector.h>
 
+//Function to make Matrix null
+void makeNull(int &a[][8])
+{
+  for(int i=0;i<11;i++)
+  {
+    for(int j=0;j<8;j++)
+    {
+      a[i][j]=0;
+    }
+  }
+}
+
+//Function to mark end of the game
+bool isEnd(int a[][8])
+{
+  int count=0;
+  int temp=a[1][1];
+  for(int i=1;i<10;i++)
+  {
+    for(int j=1;j<7;j++)
+    {
+      if(a[i][j]==temp)count++;
+      else{count=0;}
+      temp=a[i][j];
+    }
+  }
+  if (count==53) return true;
+  else return false;
+}
+  
+  
 //Function to check weightage of each cell
 bool ifAllowed(int x,int y,int value)
 {
@@ -26,7 +55,7 @@ bool ifAllowed(int x,int y,int value)
 }
 
 //Function to display the matrix
-void displayMatrix(int a[][8],int marker[][8])
+void displayMatrix(int &a[][8],int &marker[][8])
 {
   for(int i=0;i<11;i++)
   {
@@ -44,7 +73,7 @@ void displayMatrix(int a[][8],int marker[][8])
 void overflow()  //-----------------------------------------------------------------------------Function to be completed
 
 //Function to add the blobs
-void addBlobs(int x,int y,int a[][10],int marker[][8],int player)
+void addBlobs(int x,int y,int &a[][10],int &marker[][8],int player)
 {
   if(marker[x][y]==0)
   {
@@ -56,7 +85,27 @@ void addBlobs(int x,int y,int a[][10],int marker[][8],int player)
     if(marker[x][y]==player)
     { 
       if(isAllowed(x,y,a[x][y])==true) a[x][y]++;
-      if(isAllowed(x,y,a[x][y])==false) overflow() //------------------------------------------Arguements to be written
+      if(isAllowed(x,y,a[x][y])==false) overflow(); //------------------------------------------Arguements to be written
     }
     if(marker[x][y]!=player)cout<<"Illegal move"<<endl;
   }
+}
+  
+  void main()
+  {
+    int x,y,marker[11][8],matrix[11][8],player=1;
+    makeNull(marker);
+    makeNull(matrix);
+    cin>>x;
+    if(x>=0)cin>>y;
+    while(x>=0 && isEnd==false)
+    {
+      addBlobs(x,y,matrix,marker,player);
+      displayMatrix(matrix,marker);
+      if(player==1)player=2;
+      else if(player==2) player=1;
+      cin>>x;
+      if(x>=0)cin>>y;
+    }
+  }
+      
