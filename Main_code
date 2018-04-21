@@ -32,12 +32,12 @@ bool isEnd(int a[][8])
   if (count==53) return true;
   else return false;
 }
-  
-  
+
+
 //Function to check weightage of each cell
 bool ifAllowed(int x,int y,int value)
 {
-  if((x==1 && y==1) || (x==9 && y==6) || (x==1 && y==6) || (x==9 && y==1)) 
+  if((x==1 && y==1) || (x==9 && y==6) || (x==1 && y==6) || (x==9 && y==1))
   {
     if(value<1) return true;
     else return false;
@@ -60,7 +60,7 @@ void displayMatrix(int &a[][8],int &marker[][8])
   for(int i=1;i<10;i++)
   {
     for(int j=1;j<7;j++)
-    { 
+    {
       if(marker[i][j]==2) cout<<'-';
       cout<<a[i][j]<<" ";
     }
@@ -69,11 +69,25 @@ void displayMatrix(int &a[][8],int &marker[][8])
   return;
 }
 
+void addBlobs(int x,int y,int &a[][8],int &marker[][8],int player);
+
 //Function for overflow of blobs
-void overflow()  //-----------------------------------------------------------------------------Function to be completed
+void overflow(int &a[][8],int &marker[][8],int x,int y,int player)//------------------------------Function to be completed
+{
+  a[x][y]=0;
+  if(isEnd==true) return;
+  marker[x-1][y]=player;
+  marker[x+1][y]=player;
+  marker[x][y+1]=player;
+  marker[x][y-1]=player;
+  addBlobs(x+1,y,a,marker,player);
+  addBlobs(x,y+1,a,marker,player);
+  addBlobs(x-1,y,a,marker,player);
+  addBlobs(x,y-1,a,marker,player);
+}
 
 //Function to add the blobs
-void addBlobs(int x,int y,int &a[][10],int &marker[][8],int player)
+void addBlobs(int x,int y,int &a[][8],int &marker[][8],int player)
 {
   if(marker[x][y]==0)
   {
@@ -83,14 +97,14 @@ void addBlobs(int x,int y,int &a[][10],int &marker[][8],int player)
   else if(marker[x][y]!=0)
   {
     if(marker[x][y]==player)
-    { 
+    {
       if(isAllowed(x,y,a[x][y])==true) a[x][y]++;
-      if(isAllowed(x,y,a[x][y])==false) overflow(); //------------------------------------------Arguements to be written
+      if(isAllowed(x,y,a[x][y])==false) overflow(a,marker,x,y,player);
     }
     if(marker[x][y]!=player)cout<<"Illegal move"<<endl;
   }
 }
-  
+
   void main()
   {
     int x,y,marker[11][8],matrix[11][8],player=1;
@@ -108,4 +122,3 @@ void addBlobs(int x,int y,int &a[][10],int &marker[][8],int player)
       if(x>=0)cin>>y;
     }
   }
-      
