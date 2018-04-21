@@ -6,14 +6,14 @@
 #include <vector.h>
 
 //Function to check weightage of each cell
-bool allowed(int x,int y,int value)
+bool ifAllowed(int x,int y,int value)
 {
-  if((x==1 && y==1) || (x==9 && y==9) || (x==1 && y==9) || (x==9 && y==1)) 
+  if((x==1 && y==1) || (x==9 && y==6) || (x==1 && y==6) || (x==9 && y==1)) 
   {
     if(value<=1) return true;
     else return false;
   }
-  elseif(x==1 || x==9 || y==1 || y==9)
+  elseif(x==1 || x==9 || y==1 || y==6)
   {
     if(value<=2) return true;
     else return false;
@@ -22,5 +22,19 @@ bool allowed(int x,int y,int value)
   {
     if(value<=3) return true;
     else return false;
+  }
+}
+
+//Function to display the matrix
+void displayMatrix(int a[][8],int marker[][8])
+{
+  for(int i=0;i<11;i++)
+  {
+    for(int j=0;j<8;j++)
+    { 
+      if(marker[i][j]==2) cout<<'-';
+      cout<<a[i][j];
+    }
+    cout<<endl;
   }
 }
