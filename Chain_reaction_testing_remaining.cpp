@@ -1,4 +1,4 @@
-// Main code 1st attempt
+// Main code 2nd iteration
 
 #include <simplecpp>
 //#include <conio>
