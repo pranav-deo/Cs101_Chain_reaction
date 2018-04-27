@@ -146,6 +146,7 @@ makeNull(marker);
 makeNull(matrix);
 cin>>x;
 if(x>=0)cin>>y;
+else return 0;
 do
 {
   addBlobs(x+1,y+1,matrix,marker,player);
