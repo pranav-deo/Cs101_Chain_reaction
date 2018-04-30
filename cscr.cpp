@@ -157,7 +157,7 @@ do
 {
   addBlobs(x+1,y+1,matrix,marker,player);
   if(Illegal_move==false) displayMatrix(matrix,marker);
-  //cout<<endl;
+  cout<<endl;
   if((isEnd(marker,1)==true || isEnd(marker,2)==true) && no_of_turn>=2)
     {
       //cout<<"player "<<player<<" wins!";
